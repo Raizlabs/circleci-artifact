@@ -1,5 +1,6 @@
 # circleci_artifact
 
+[![CircleCI](https://img.shields.io/circleci/project/github/Raizlabs/circleci_artifact/master.svg)](https://circleci.com/gh/Raizlabs/circleci_artifact)
 
 This library is designed to make fetching the URLs for [CircleCI build artifacts](https://circleci.com/docs/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) quick and easy. Unfortunately CircleCI makes it difficult to get the URLs for your build artifacts without hitting their API, so it's not straightforward to include links to your artifacts as part of the CI process.
 
