@@ -33,7 +33,6 @@ Or install it yourself as:
 
 ```ruby
 require 'circleci_artifact'
-include CircleciArtifact
 
 # Set this yourself using the steps in "Getting Started"
 token = ENV['CIRCLE_API_TOKEN']
@@ -44,11 +43,11 @@ username = ENV['CIRCLE_PROJECT_USERNAME']
 reponame = ENV['CIRCLE_PROJECT_REPONAME']
 build = ENV['CIRCLE_BUILD_NUM']
 
-fetcher = Fetcher.new token, username, reponame, build
+fetcher = CircleciArtifact::Fetcher.new token, username, reponame, build
 
-xcov = ResourceQuery.new 'xcov', 'xcov/index.html'
-slather = ResourceQuery.new 'slather', 'slather/index.html'
-screenshots = ResourceQuery.new 'screenshots', 'screenshots/index.html'
+xcov = CircleciArtifact::Query.new 'xcov/index.html'
+slather = CircleciArtifact::Query.new 'slather/index.html'
+screenshots = CircleciArtifact::Query.new 'screenshots/index.html'
 queries = [xcov, slather, screenshots]
 results = fetcher.fetch(queries)
 
@@ -56,7 +55,6 @@ xcov_url = results.url_for_query(xcov)
 slather_url = results.url_for_query(slather)
 screenshots_url = results.url_for_query(screenshots)
 
-puts "queries: #{queries}"
 puts "xcov_url #{xcov_url}"
 puts "slather_url #{slather_url}"
 puts "screenshots_url #{screenshots_url}"
