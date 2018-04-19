@@ -44,13 +44,13 @@ username = ENV['CIRCLE_PROJECT_USERNAME']
 reponame = ENV['CIRCLE_PROJECT_REPONAME']
 build = ENV['CIRCLE_BUILD_NUM']
 
-fetcher = CircleciArtifact::Fetcher.new token, username, reponame, build
+fetcher = CircleciArtifact::Fetcher.new(token: token, username: username, reponame: reponame, build: build)
 
-xcov = CircleciArtifact::Query.new 'xcov/index.html'
-slather = CircleciArtifact::Query.new 'slather/index.html'
-screenshots = CircleciArtifact::Query.new 'screenshots/index.html'
+xcov = CircleciArtifact::Query.new(url_substring: 'xcov/index.html')
+slather = CircleciArtifact::Query.new(url_substring: 'slather/index.html')
+screenshots = CircleciArtifact::Query.new(url_substring: 'screenshots/index.html')
 queries = [xcov, slather, screenshots]
-results = fetcher.fetch(queries)
+results = fetcher.fetch_queries(queries)
 
 xcov_url = results.url_for_query(xcov)
 slather_url = results.url_for_query(slather)

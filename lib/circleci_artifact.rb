@@ -107,7 +107,7 @@ module CircleciArtifact
     #
     # @param queries [Array<Query>]
     # @return  [ResultSet]
-    def fetch(queries:)
+    def fetch_queries(queries)
       raise ArgumentError, 'Error: Must have queries' unless queries.is_a?(Array)
       build = CircleCi::Build.new @username, @reponame, nil, @build, @config
       artifacts = build.artifacts
