@@ -42,19 +42,19 @@ class CircleciArtifactTest < Minitest::Test
     reponame = "reponame"
     build = "build"
 
-    fetcher = Fetcher.new token, username, reponame, build
+    fetcher = Fetcher.new(token: token, username: username, reponame: reponame, build: build)
 
-    xcov = Query.new 'xcov/index.html'
-    slather2 = Query.new 'slather/index.html'
-    slather = Query.new 'slather/index.html'
-    screenshots = Query.new 'screenshots/index.html'
-    not_found = Query.new 'not found'
+    xcov = Query.new(url_substring: 'xcov/index.html')
+    slather2 = Query.new(url_substring: 'slather/index.html')
+    slather = Query.new(url_substring: 'slather/index.html')
+    screenshots = Query.new(url_substring: 'screenshots/index.html')
+    not_found = Query.new(url_substring: 'not found')
     queries = [xcov, slather, slather2, screenshots, not_found]
     puts "queries: #{queries}"
 
     #results = fetcher.fetch(queries)
     artifacts = MockArtifacts.new
-    results = fetcher.parse_artifacts(artifacts, queries)
+    results = fetcher.parse(artifacts: artifacts, queries: queries)
 
     xcov_url = results.url_for_query(xcov)
     slather_url = results.url_for_query(slather)
