@@ -1,8 +1,10 @@
-source "https://rubygems.org"
+# frozen_string_literal: true
 
-git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
+source 'https://rubygems.org'
+
+git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
 # Specify your gem's dependencies in circleci_artifact.gemspec
 gemspec
 
-# gem 'circleci_artifact', :git => 'https://github.com/Raizlabs/circleci_artifact.git', :branch => 'master'
+gem 'rubocop', '~> 0.55.0', require: false

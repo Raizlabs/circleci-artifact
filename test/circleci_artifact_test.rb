@@ -1,46 +1,45 @@
-require "test_helper"
+# frozen_string_literal: true
 
-include CircleciArtifact
-
+require 'test_helper'
 
 class MockArtifacts
   attr_reader :body
 
-    # [
-    #   {
-    #     node_index: 0,
-    #     path: "/tmp/circle-artifacts.NHQxLku/cherry-pie.png",
-    #     pretty_path: "$CIRCLE_ARTIFACTS/cherry-pie.png",
-    #     url: "https://circleci.com/gh/circleci/mongofinil/22/artifacts/0/tmp/circle-artifacts.NHQxLku/cherry-pie.png"
-    #   },
-    #   {
-    #     node_index: 0,
-    #     path: "/tmp/circle-artifacts.NHQxLku/rhubarb-pie.png",
-    #     pretty_path: "$CIRCLE_ARTIFACTS/rhubarb-pie.png",
-    #     url: "https://circleci.com/gh/circleci/mongofinil/22/artifacts/0/tmp/circle-artifacts.NHQxLku/rhubarb-pie.png"
-    #   }
-    # ]
-  def initialize()
+  # [
+  #   {
+  #     node_index: 0,
+  #     path: "/tmp/circle-artifacts.NHQxLku/cherry-pie.png",
+  #     pretty_path: "$CIRCLE_ARTIFACTS/cherry-pie.png",
+  #     url: "https://circleci.com/gh/circleci/mongofinil/22/artifacts/0/tmp/circle-artifacts.NHQxLku/cherry-pie.png"
+  #   },
+  #   {
+  #     node_index: 0,
+  #     path: "/tmp/circle-artifacts.NHQxLku/rhubarb-pie.png",
+  #     pretty_path: "$CIRCLE_ARTIFACTS/rhubarb-pie.png",
+  #     url: "https://circleci.com/gh/circleci/mongofinil/22/artifacts/0/tmp/circle-artifacts.NHQxLku/rhubarb-pie.png"
+  #   }
+  # ]
+  def initialize
     @body = []
-    @body.push({'url' => 'https://example.com/xcov/index.html'})
-    @body.push({'url' => 'https://example.com/what/slather/index.html'})
-    @body.push({'url' => 'https://example.com/slather/index.html'})
-    @body.push({'url' => 'https://example.com/screenshots/index.html'})
+    @body.push('url' => 'https://example.com/xcov/index.html')
+    @body.push('url' => 'https://example.com/what/slather/index.html')
+    @body.push('url' => 'https://example.com/slather/index.html')
+    @body.push('url' => 'https://example.com/screenshots/index.html')
     @body.push({})
   end
-
 end
 
 class CircleciArtifactTest < Minitest::Test
+  include CircleciArtifact
   def test_that_it_has_a_version_number
     refute_nil ::CircleciArtifact::VERSION
   end
 
   def test_it_does_something_useful
-    token = "token"
-    username = "username"
-    reponame = "reponame"
-    build = "build"
+    token = 'token'
+    username = 'username'
+    reponame = 'reponame'
+    build = 'build'
 
     fetcher = Fetcher.new(token: token, username: username, reponame: reponame, build: build)
 
@@ -52,7 +51,7 @@ class CircleciArtifactTest < Minitest::Test
     queries = [xcov, slather, slather2, screenshots, not_found]
     puts "queries: #{queries}"
 
-    #results = fetcher.fetch(queries)
+    # results = fetcher.fetch(queries)
     artifacts = MockArtifacts.new
     results = fetcher.parse(artifacts: artifacts, queries: queries)
 
