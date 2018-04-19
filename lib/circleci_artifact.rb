@@ -56,6 +56,7 @@ class ResultSet
   # Returns first result for query
   #
   # @param   query [Query]
+  # @return [Result]
   def result_for_query(query)
     results_for_query(query).first
   end
@@ -63,6 +64,7 @@ class ResultSet
   # Returns all results matching query
   #
   # @param   query [Query]
+  # @return [Array<Result>]
   def results_for_query(query)
     raise ArgumentError if !query.is_a?(Query)
     @results[query] ? @results[query] : []
@@ -71,6 +73,7 @@ class ResultSet
   # Returns first url for query
   #
   # @param   query [Query]
+  # @return [String]
   def url_for_query(query)
     result_for_query(query)&.url
   end
